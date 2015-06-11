@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "UTF-8" />
+	<title>短网址 - </title>
+	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		#u_form{
+
+		}
+	</style>
+	<script type="text/javascript" src = "http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div id = "" class="col-lg-10 col-md-offset-1" style="border:1px solid red;">
+				<form name="my_url" action="./get_url.php" role = "form" method="get">
+					<table align="center">
+						<tr>
+							<td>
+								<div class="form-group"><input type="url" name="url" id="url" class="form-control"></div>
+							</td>
+							<td><div class="form-group"><button type="button" class="btn btn-default" onclick="SendUrl();">提交</button></div></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var new_url;
+		function SendUrl(){
+			var url = document.getElementById("url").value;
+
+			$.get("./get_url.php",{url:url},function(data,status){
+				alert(data[urls][0][url_short]);
+			})
+		}
+	</script>
+</body>
+</html>
