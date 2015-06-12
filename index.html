@@ -5,8 +5,15 @@
 	<title>短网址 - </title>
 	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
 	<style type="text/css">
+		body{
+			font-size: 14px;
+			font-family: '微软雅黑';
+		}
 		#u_form{
 
+		}
+		#result{
+			display: none;
 		}
 	</style>
 	<script type="text/javascript" src = "http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -28,13 +35,29 @@
 			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-offset-4 text-center" id="result">您请求的地址为：<a href="" id="t_url" target="_blank"></a></span></div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		var new_url;
 		function SendUrl(){
 			var url = document.getElementById("url").value;
 
-			$.get("./get_url.php",{url:url},function(data,status){
-				alert(data[urls][0][url_short]);
+			$.get("./get_url.php",{url:url},function(re,status){
+				
+				var t = new Function("return" + re)();//转换后的JSON对象
+				new_url = t.urls;
+
+				if (status == 'success') {
+					$("#result").show();
+					document.getElementById("t_url").href = new_url[0]['url_short'];
+					document.getElementById("t_url").innerHTML = new_url[0]['url_short'];
+				}
+
+				// alert(t);
+				// alert(new_url[0]['url_short']);
 			})
 		}
 	</script>
